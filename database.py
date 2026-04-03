@@ -1,6 +1,9 @@
 import pyodbc
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-server = "DESKTOP-IALE84M\\SQLEXPRESS"
+server = os.getenv("IP_SERVIDOR")
 database = "GimnasioDB"
 
 print("Controladores ODBC instalados:")
@@ -17,13 +20,24 @@ candidate_drivers = [
 connected = False
 last_error = None
 
+sa_passw = os.getenv("SA_PASSW")
+user = "sa"
+
+
+password = sa_passw
+
+print(f"DEBUG: Contraseña cargada: {'Sí' if password else 'No (Viene vacía)'}")
+
 for driver in candidate_drivers:
     try:
         conn_str = (
             f"Driver={{{driver}}};"
             f"Server={server};"
             f"Database={database};"
-            "Trusted_Connection=yes;"
+            f"UID={user};"
+            f"PWD={password};"
+            "Encrypt=no;"
+            "TrustServerCertificate=yes;"
         )
         print(f"Probando conexión con driver: {driver}")
         conexion = pyodbc.connect(conn_str, timeout=5)
