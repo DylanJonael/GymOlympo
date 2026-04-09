@@ -1,0 +1,14 @@
+from sqlalchemy.orm import Session
+from backend.app.models.cliente import Cliente
+
+def get_all_clientes(db: Session):
+    return db.query(Cliente).all()
+
+def get_cliente_by_id(db: Session, cliente_id: int):
+    return db.query(Cliente).filter(Cliente.ID_Cliente == cliente_id).first()
+
+def create_cliente(db: Session, cliente: Cliente):
+    db.add(cliente)
+    db.commit()
+    db.refresh(cliente)
+    return cliente

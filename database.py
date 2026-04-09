@@ -1,3 +1,4 @@
+"""
 import pyodbc
 from dotenv import load_dotenv
 import os
@@ -62,3 +63,5 @@ else:
     cursor.execute("SELECT ID_Cliente, Nombre, Cedula FROM Clientes")
     for fila in cursor:
         print(f"ID: {fila.ID_Cliente} | Nombre: {fila.Nombre} | Cédula: {fila.Cedula}")
+
+"""
