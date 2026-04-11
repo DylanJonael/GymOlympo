@@ -1,3 +1,9 @@
 # hola
 .env
 .gitignore
+__pycache__/
+*.pyc
+.pytest_cache/
+pytest-cache-files-*/
+frontend/node_modules/
+frontend/dist/

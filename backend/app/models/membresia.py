@@ -1,12 +1,17 @@
-from sqlalchemy import Column, Integer, String, Numeric
-from sqlalchemy.orm import declarative_base
+from decimal import Decimal
 
-Base = declarative_base()
+from sqlalchemy import Integer, Numeric, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from backend.app.database import Base
+
 
 class Membresia(Base):
-    __tablename__ = 'Membresias'
+    __tablename__ = "Membresias"
 
-    ID_Membresia = Column(Integer, primary_key=True, autoincrement=True)
-    Tipo = Column(String(50), nullable=False)
-    Precio = Column(Numeric(10, 2), nullable=False)
-    Duracion_Dias = Column(Integer, nullable=False)
+    ID_Membresia: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    Tipo: Mapped[str] = mapped_column(String(50), nullable=False)
+    Precio: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
+    Duracion_Dias: Mapped[int] = mapped_column(Integer, nullable=False)
+
+    pagos = relationship("Pago", back_populates="membresia")
