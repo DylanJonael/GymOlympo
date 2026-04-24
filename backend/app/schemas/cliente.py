@@ -4,9 +4,9 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 class ClienteBase(BaseModel):
-    Nombre: str = Field(min_length=1, max_length=100)
-    WhatsApp: str | None = Field(default=None, max_length=20)
-    Cedula: str | None = Field(default=None, max_length=15)
+    Nombre: str = Field(min_length=1, max_length=50)
+    WhatsApp: str | None = Field(default=None, max_length=10, pattern=r"^\d+$")
+    Cedula: str | None = Field(default=None, max_length=10, pattern=r"^\d+$")
 
 
 class ClienteCreate(ClienteBase):
@@ -14,9 +14,9 @@ class ClienteCreate(ClienteBase):
 
 
 class ClienteUpdate(BaseModel):
-    Nombre: str | None = Field(default=None, min_length=1, max_length=100)
-    WhatsApp: str | None = Field(default=None, max_length=20)
-    Cedula: str | None = Field(default=None, max_length=15)
+    Nombre: str | None = Field(default=None, min_length=1, max_length=50)
+    WhatsApp: str | None = Field(default=None, max_length=10, pattern=r"^\d+$")
+    Cedula: str | None = Field(default=None, max_length=10, pattern=r"^\d+$")
 
 
 class ClienteResponse(ClienteBase):
